@@ -18,7 +18,7 @@ const noMessages = [
     "Please Dudu??? 💔",
     "Don't do this to me...",
     "Last chance! 😭",
-    "You can't catch me anyway 😜"
+    "Error 403: NO not allowed 😜"
 ]
 
 const yesTeasePokes = [
@@ -33,6 +33,8 @@ let yesTeasedCount = 0
 let noClickCount = 0
 let runawayEnabled = false
 let musicPlaying = true
+let runawayCount = 0
+const maxRunawayMoves = 20
 
 const catGif = document.getElementById('cat-gif')
 const yesBtn = document.getElementById('yes-btn')
@@ -129,6 +131,14 @@ function enableRunaway() {
 }
 
 function runAway() {
+    if (runawayCount >= maxRunawayMoves) {
+        // Stop runaway behavior
+        noBtn.removeEventListener('mouseover', runAway)
+        noBtn.removeEventListener('touchstart', runAway)
+        return
+    }
+
+    runawayCount++
     const margin = 20
     const btnW = noBtn.offsetWidth
     const btnH = noBtn.offsetHeight
